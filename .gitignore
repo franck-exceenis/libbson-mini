@@ -1,0 +1,6 @@
+*.o
+*.bson
+
+bson_reader
+
+test/build*

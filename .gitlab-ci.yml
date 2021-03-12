@@ -1,0 +1,29 @@
+image: registry.gitlab.com/exceenis/lib/libbson-mini:v1
+
+stages:
+  - build
+  - test
+
+Build:
+  stage: build
+  artifacts:
+    name: "$CI_PROJECT_NAME-$CI_JOB_NAME-$CI_COMMIT_REF_NAME-$CI_COMMIT_SHORT_SHA"
+    paths:
+      - bson_reader
+    expire_in: 1 day
+  script:
+    - make -j$(nproc)
+
+Format:
+  stage: test
+  script:
+    - clang-format-11 --style=file -i $(find . -name '*.c' -o -name '*.h' -o -name '*.cpp')
+    - if ! git diff-index --quiet HEAD -- '*.h' '*.c' '*.cpp'; then git diff -- '*.h' '*.c' '*.cpp'; exit 1; fi
+
+Unit Test:
+  stage: test
+  script:
+    - cd test && mkdir build && cd build
+    - cmake ..
+    - make -j$(nproc)
+    - ctest -VV
