@@ -1,6 +1,6 @@
 /*
  * This file is part of the libbson-mini distribution
- * (https://gitlab.com/exceenis/lib/libbson-mini or https://github.com/franck-exceenis/libbson-mini.git).
+ * (https://gitlab.com/exceenis/lib/libbson-mini or https://github.com/franck-exceenis/libbson-mini).
  * Copyright (c) 2020 Franck Duriez
  *
  * Free Licensing:
