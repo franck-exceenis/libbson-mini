@@ -11,7 +11,7 @@ include(ExternalProject)
 
 ExternalProject_Add(
   "gtest"
-  URL "https://github.com/google/googletest/archive/v1.10.x.zip"
+  URL "https://github.com/google/googletest/archive/refs/tags/release-1.10.0.zip"
   PREFIX "${CMAKE_CURRENT_BINARY_DIR}/gtest"
   # Disable install step
   INSTALL_COMMAND ""
@@ -62,9 +62,16 @@ target_link_libraries(coverage_config PUBLIC INTERFACE "--coverage")
 
 include_directories("../src")
 
-add_executable("bson"
-  "bson.cpp"
+add_executable("bson_c"
+  "bson_c.cpp"
   "../src/bson.c")
-target_link_libraries("bson" "libgtestmain" "libgtest" "libgmock" "pthread" "coverage_config")
-add_test(NAME "bson" COMMAND "bson" "${CMAKE_CURRENT_LIST_DIR}/data/data.bson")
+target_link_libraries("bson_c" "libgtestmain" "libgtest" "libgmock" "pthread" "coverage_config")
+add_test(NAME "bson_c" COMMAND "bson_c" "${CMAKE_CURRENT_LIST_DIR}/data/data.bson")
+
+add_executable("bson_cpp"
+  "bson_cpp.cpp"
+  "../src/bson.c"
+  "../src/bson.cpp")
+target_link_libraries("bson_cpp" "libgtestmain" "libgtest" "libgmock" "pthread" "coverage_config")
+add_test(NAME "bson_cpp" COMMAND "bson_cpp" "${CMAKE_CURRENT_LIST_DIR}/data/data.bson")
 
