@@ -262,16 +262,14 @@ decode(char const* input) {
       }
 
       case BSON_OBJECT: {
-        Object& value        = (result[name] = Variant(BSON_OBJECT)).asObject();
-        value                = decode(obj);
+        result[name].setObject(decode(obj));
         uint32_t sizeCurrent = bson_get_size(obj, NULL);
         obj += sizeCurrent;
         break;
       }
 
       case BSON_ARRAY: {
-        Object& value        = (result[name] = Variant(BSON_ARRAY)).asArray();
-        value                = decode(obj);
+        result[name].setArray(decode(obj));
         uint32_t sizeCurrent = bson_get_size(obj, NULL);
         obj += sizeCurrent;
         break;

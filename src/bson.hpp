@@ -298,6 +298,34 @@ class Variant {
     return *this;
   }
 
+  inline Variant&
+  setArray(Object&& value) {
+    if (_type != BSON_ARRAY || _type != BSON_OBJECT) _free();
+
+    _type   = BSON_ARRAY;
+    _object = new Object(std::move(value));
+    return *this;
+  }
+
+  inline Variant&
+  setArray(Object const& value) {
+    return setArray(Object(value));
+  }
+
+  inline Variant&
+  setObject(Object&& value) {
+    if (_type != BSON_ARRAY || _type != BSON_OBJECT) _free();
+
+    _type   = BSON_OBJECT;
+    _object = new Object(std::move(value));
+    return *this;
+  }
+
+  inline Variant&
+  setObject(Object const& value) {
+    return setObject(Object(value));
+  }
+
  private:
   void
   _free(void);
