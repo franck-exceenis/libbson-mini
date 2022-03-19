@@ -31,6 +31,8 @@
 extern "C" {
 #endif
 
+#define BSON_EMPTY "\x05\x00\x00\x00\x00"
+
 typedef enum {
   BSON_END               = 0x00,
   BSON_DOUBLE            = 0x01,
