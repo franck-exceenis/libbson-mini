@@ -288,6 +288,11 @@ class Variant {
   }
 
   inline Variant&
+  operator=(std::string const& value) {
+    return operator=(value.c_str());
+  }
+
+  inline Variant&
   operator=(Binary const& value) {
     if (_type != BSON_BINARY) {
       _free();
