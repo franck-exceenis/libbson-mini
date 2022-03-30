@@ -3,7 +3,6 @@
  * (https://gitlab.com/exceenis/lib/libbson-mini or https://github.com/franck-exceenis/libbson-mini).
  * Copyright (c) 2020 Franck Duriez
  *
- * Free Licensing:
  *   This program is free software: you can redistribute it and/or modify
  *   it under the terms of the GNU General Public License as published by
  *   the Free Software Foundation, version 3.
@@ -15,10 +14,6 @@
  *
  *   You should have received a copy of the GNU General Public License
  *   along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
- * Commercial Licensing:
- *   You should have received a copy of the commercial licensing condition
- *   along with this program. If not, contact us at <contact@exceenis.com>.
  */
 
 #include "./bson.hpp"
