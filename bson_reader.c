@@ -67,7 +67,7 @@ parse_stdin(void) {
   {
     ssize_t readBytes =
         read(STDIN_FILENO, buffer + sizeof(header_buffer), size - sizeof(header_buffer));
-    if (readBytes != size - sizeof(header_buffer)) {
+    if (readBytes != (ssize_t)(size - sizeof(header_buffer))) {
       fprintf(
           stderr,
           "Unable to read bson body expect %lu bytes but got only %lu",
@@ -80,6 +80,7 @@ parse_stdin(void) {
   }
 
   free(buffer);
+  return 0;
 }
 
 int
