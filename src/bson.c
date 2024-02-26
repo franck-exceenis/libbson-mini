@@ -26,8 +26,8 @@
 
 uint32_t
 bson_get_size(char const* obj, char const** next) {
-  uint8_t* uobj   = (uint8_t*) obj;
-  uint32_t result = uobj[0];
+  uint8_t const* uobj = (uint8_t const*) obj;
+  uint32_t result     = uobj[0];
   result |= uobj[1] << 8;
   result |= uobj[2] << 16;
   result |= uobj[3] << 24;
@@ -59,7 +59,7 @@ bson_get_element_value_binary(
     uint32_t* size,
     bson_binary_t* subtype,
     char const** next) {
-  uint8_t* uelem = (uint8_t*) elem;
+  uint8_t const* uelem = (uint8_t const*) elem;
 
   uint32_t result_size = uelem[0];
   result_size |= uelem[1] << 8;
@@ -79,7 +79,8 @@ bson_get_element_value_binary(
 char const*
 bson_get_element_value_string(char const* elem, uint32_t* size, char const** next) {
   char const* result   = elem + sizeof(*size);
-  uint8_t* uelem       = (uint8_t*) elem;
+  uint8_t const* uelem = (uint8_t const*) elem;
+
   uint32_t result_size = uelem[0];
   result_size |= uelem[1] << 8;
   result_size |= uelem[2] << 16;
@@ -92,7 +93,8 @@ bson_get_element_value_string(char const* elem, uint32_t* size, char const** nex
 
 int32_t
 bson_get_element_value_int32(char const* elem, char const** next) {
-  uint8_t* uelem = (uint8_t*) elem;
+  uint8_t const* uelem = (uint8_t const*) elem;
+
   int32_t result = uelem[0];
   result |= uelem[1] << 8;
   result |= uelem[2] << 16;
@@ -103,7 +105,8 @@ bson_get_element_value_int32(char const* elem, char const** next) {
 
 int64_t
 bson_get_element_value_int64(char const* elem, char const** next) {
-  uint8_t* uelem = (uint8_t*) elem;
+  uint8_t const* uelem = (uint8_t const*) elem;
+
   int64_t result = uelem[4];
   result |= uelem[5] << 8;
   result |= uelem[6] << 16;
@@ -127,7 +130,7 @@ bson_get_element_value_bool(char const* elem, char const** next) {
 
 double
 bson_get_element_value_double(char const* elem, char const** next) {
-  double result = *((double*) elem);
+  double result = *((double*) elem); // cppcheck-suppress invalidPointerCast
   if (next) *next = elem + sizeof(double);
   return result;
 }

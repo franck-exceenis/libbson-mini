@@ -73,6 +73,7 @@ parse_stdin(void) {
           "Unable to read bson body expect %lu bytes but got only %lu",
           (long unsigned) size,
           (long unsigned) (readBytes + sizeof(header_buffer)));
+      free(buffer);
       return 3;
     }
 
