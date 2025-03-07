@@ -312,7 +312,7 @@ class Variant {
 
   inline Variant&
   setArray(Object&& value) {
-    if (_type != BSON_ARRAY || _type != BSON_OBJECT) {
+    if (_type != BSON_ARRAY && _type != BSON_OBJECT) {
       _free();
       _object = new Object(std::move(value));
     } else {
@@ -331,7 +331,7 @@ class Variant {
 
   inline Variant&
   setObject(Object&& value) {
-    if (_type != BSON_ARRAY || _type != BSON_OBJECT) {
+    if (_type != BSON_ARRAY && _type != BSON_OBJECT) {
       _free();
       _object = new Object(std::move(value));
     } else {
