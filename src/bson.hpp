@@ -296,19 +296,26 @@ class Variant {
   operator=(Binary const& value) {
     if (_type != BSON_BINARY) {
       _free();
-      _type = BSON_BINARY;
+      _type   = BSON_BINARY;
+      _binary = new Binary(value);
+    } else {
+      *_binary = value;
     }
 
-    _binary = new Binary(value);
     return *this;
   }
 
   inline Variant&
   setArray(Object&& value) {
-    if (_type != BSON_ARRAY || _type != BSON_OBJECT) _free();
+    if (_type != BSON_ARRAY || _type != BSON_OBJECT) {
+      _free();
+      _object = new Object(std::move(value));
+    } else {
+      *_object = std::move(value);
+    }
 
-    _type   = BSON_ARRAY;
-    _object = new Object(std::move(value));
+    _type = BSON_ARRAY;
+
     return *this;
   }
 
@@ -319,10 +326,14 @@ class Variant {
 
   inline Variant&
   setObject(Object&& value) {
-    if (_type != BSON_ARRAY || _type != BSON_OBJECT) _free();
+    if (_type != BSON_ARRAY || _type != BSON_OBJECT) {
+      _free();
+      _object = new Object(std::move(value));
+    } else {
+      *_object = std::move(value);
+    }
+    _type = BSON_OBJECT;
 
-    _type   = BSON_OBJECT;
-    _object = new Object(std::move(value));
     return *this;
   }
 
