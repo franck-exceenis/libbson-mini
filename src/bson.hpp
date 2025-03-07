@@ -130,6 +130,11 @@ class Object {
   const_iterator
   find(uint32_t key) const;
 
+  size_t
+  size(void) const {
+    return _data.size();
+  }
+
  private:
   data _data;
 };
