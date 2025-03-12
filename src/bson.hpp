@@ -131,9 +131,7 @@ class Object {
   find(uint32_t key) const;
 
   size_t
-  size(void) const {
-    return _data.size();
-  }
+  size(void) const;
 
  private:
   data _data;
@@ -364,6 +362,11 @@ class Variant {
     Binary* _binary;
   };
 };
+
+inline size_t
+Object::size(void) const {
+  return _data.size();
+}
 
 Object
 decode(char const* input);
