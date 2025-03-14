@@ -83,6 +83,16 @@ Object::find(uint32_t key) const {
   return find(std::to_string(key));
 }
 
+bool
+Object::has(std::string const& key) const {
+  return find(key) != end();
+}
+
+bool
+Object::has(uint32_t key) const {
+  return has(std::to_string(key));
+}
+
 } // namespace bson
 
 // Variant

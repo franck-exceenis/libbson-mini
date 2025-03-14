@@ -118,6 +118,12 @@ class Object {
     return _data.end();
   }
 
+  bool
+  has(std::string const& key) const;
+
+  bool
+  has(uint32_t key) const;
+
   iterator
   find(std::string const& key);
 
